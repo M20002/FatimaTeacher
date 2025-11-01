@@ -278,6 +278,72 @@ body.no-scroll{overflow:hidden}
 section ul{padding-inline-start:1.2em}
 section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+  /* ===================== FIX: keep section title & action icons on the same line ===================== */
+.section-head{
+  /* old: display:flex; justify-content:space-between; */
+  display:grid !important;                     /* FIX: grid keeps two columns aligned */
+  grid-template-columns: 1fr auto !important;  /* FIX: title grows, actions stay compact on the right */
+  align-items:center !important;
+  gap:12px;
+  padding-inline:8px;
+  margin:-4px -6px 12px;
+}
+
+.section-head .title{
+  /* Make the title shrinkable so it doesn't push buttons to a new line */
+  min-width:0 !important;                      /* FIX: allow ellipsis */
+  display:flex;
+  align-items:center;
+  gap:10px;
+  border-inline-start:6px solid var(--brand-2);
+  padding-inline-start:10px;
+  white-space:nowrap;                           /* FIX */
+  overflow:hidden;                              /* FIX */
+  text-overflow:ellipsis;                       /* FIX */
+}
+
+.section-head .title i{
+  flex:0 0 auto;                                /* FIX: icon never compresses weirdly */
+}
+
+/* Action buttons group (upload icons, etc.) */
+.section-head .actions{
+  display:flex !important;
+  align-items:center !important;                /* FIX: vertically center icons with the title line */
+  justify-content:flex-end;
+  gap:8px;
+  flex-wrap:nowrap !important;                  /* FIX: do not drop to next line */
+}
+
+/* Make the small icon buttons solid and aligned */
+.btn.icon,
+.icon-btn,
+.section-head .actions label.btn.icon{
+  display:inline-flex !important;               /* FIX */
+  align-items:center !important;                /* FIX */
+  justify-content:center !important;            /* FIX */
+  height:34px;                                  /* FIX: consistent hit area */
+  min-width:34px;                               /* FIX */
+  padding:0 8px;                                /* FIX */
+  border-radius:10px;
+  background:#fff;                              /* match your theme button base */
+  border:1px solid var(--line);
+  box-shadow:0 4px 10px rgba(0,0,0,.04);
+  cursor:pointer;
+}
+
+/* Ensure the upload <label> stays inline with the buttons even if text gets long */
+.section-head .actions label.btn.icon{
+  white-space:nowrap;                            /* FIX */
+}
+
+/* On very tight screens, still try to keep a single line; if it overflows, title truncates. */
+@media (max-width: 380px){
+  .section-head{
+    grid-template-columns: 1fr auto;            /* still two columns */
+  }
+}
+
 </style>
 </head>
 
