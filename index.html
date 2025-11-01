@@ -142,24 +142,20 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 .section-head .title{margin:0;color:#7a5328;display:flex;align-items:center;gap:10px;border-inline-start:6px solid var(--brand-2);padding-inline-start:10px}
 .section-head .title i{color:#a98559}
 .section-head .actions{display:flex;gap:8px}
-.lead{font-size:18px;line-height:1.9} /* fixed: stray comment removed earlier */
+.lead{font-size:18px;line-height:1.9}
 
 /* ===================== MEDIA GRID — SMALL TIDY CARDS ===================== */
-/* 🔧 CHANGED: compact cards + consistent spacing; 3-up on most phones, 2-up on very narrow */
 .media-grid{
   display:grid;
-  gap:12px;                           /* compact spacing */
+  gap:12px;
   grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
 }
 @media (min-width:480px){
-  /* phones ≥480px: slightly larger cards, still many per row */
   .media-grid{ grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); }
 }
 @media (min-width:768px){
-  /* tablets/desktop */
   .media-grid{ grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:14px; }
 }
-
 .media-card{
   position:relative;background:#fff;border:1px solid var(--line);
   border-radius:12px; overflow:hidden;
@@ -168,14 +164,12 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 }
 .media-card:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(110,73,34,.12); border-color:#d9c6b0; }
 .media-thumb{ position:relative; width:100%; background:#000; overflow:hidden }
-.media-thumb[data-kind="image"]{ aspect-ratio:4/5 }   /* 🔧 CHANGED: smaller portrait-ish to keep cards compact */
+.media-thumb[data-kind="image"]{ aspect-ratio:4/5 }
 .media-thumb[data-kind="video"]{ aspect-ratio:16/9 }
 .media-thumb[data-kind="pdf"]{ aspect-ratio:4/5; background:#fff }
 .media-thumb img,.media-thumb video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; background:#fff
 }
-
-/* action icons on cards */
 .media-actions{
   position:absolute; top:8px; inset-inline-end:8px; display:flex; gap:6px; z-index:2
 }
@@ -185,19 +179,10 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 }
 .icon-btn i{color:#7a5328}
 
-/* 🧰 OLD (kept per your request): earlier phone-forced 2 columns
-@media (max-width: 640px){
-  .media-grid{grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important;}
-  .media-card{min-width:0}
-  .media-thumb[data-kind="image"], .media-thumb[data-kind="pdf"]{aspect-ratio: 4/3;}
-  .media-thumb[data-kind="video"]{aspect-ratio: 16/9;}
-}
-*/
-
 /* ===================== CV CARDS ===================== */
 .cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
 .cv-card.pale-glow{
-  background:linear-gradient(180deg,#ffffff,#f1e6d8);border-color:#d8c7b2;
+  background:linear-gradient(180deg,#ffffff,#f1e6د8);border-color:#d8c7b2;
   box-shadow:0 10px 24px rgba(110,73,34,.13),0 1px 0 rgba(255,250,242,.95) inset
 }
 
@@ -240,7 +225,7 @@ body.no-scroll{overflow:hidden}
 }
 #overlay .toolbar{
   position:sticky; top:0; display:flex; align-items:center; gap:8px; justify-content:space-between;
-  padding:8px 10px; background:linear-gradient(180deg,#fff,#f1e6d8); border-bottom:1px solid var(--line); z-index:2
+  padding:8px 10px; background:linear-gradient(180deg,#fff,#ف1e6d8); border-bottom:1px solid var(--line); z-index:2
 }
 #overlay .toolbar .title{display:flex;align-items:center;gap:10px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #overlay .toolbar .actions{display:flex;gap:8px}
@@ -252,7 +237,7 @@ body.no-scroll{overflow:hidden}
 #overlay .content video{max-width:100%;max-height:84vh;display:block}
 #overlay .content iframe{width:100%;height:84vh;border:0;background:#fff}
 
-/* 🔧 CHANGED: CLEAR floating close button (big, always visible) */
+/* CLEAR floating close button */
 #overlay .close-fab{
   position:absolute; top:10px; inset-inline-end:10px; z-index:3;
   width:42px; height:42px; border-radius:999px; border:1px solid #cfbca7;
@@ -278,72 +263,35 @@ body.no-scroll{overflow:hidden}
 section ul{padding-inline-start:1.2em}
 section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-  /* ===================== FIX: keep section title & action icons on the same line ===================== */
+
+/* ===================== FIX header icons same line ===================== */
 .section-head{
-  /* old: display:flex; justify-content:space-between; */
-  display:grid !important;                     /* FIX: grid keeps two columns aligned */
-  grid-template-columns: 1fr auto !important;  /* FIX: title grows, actions stay compact on the right */
+  display:grid !important;
+  grid-template-columns: 1fr auto !important;
   align-items:center !important;
   gap:12px;
   padding-inline:8px;
   margin:-4px -6px 12px;
 }
-
 .section-head .title{
-  /* Make the title shrinkable so it doesn't push buttons to a new line */
-  min-width:0 !important;                      /* FIX: allow ellipsis */
-  display:flex;
-  align-items:center;
-  gap:10px;
+  min-width:0 !important;
+  display:flex; align-items:center; gap:10px;
   border-inline-start:6px solid var(--brand-2);
   padding-inline-start:10px;
-  white-space:nowrap;                           /* FIX */
-  overflow:hidden;                              /* FIX */
-  text-overflow:ellipsis;                       /* FIX */
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
-
-.section-head .title i{
-  flex:0 0 auto;                                /* FIX: icon never compresses weirdly */
-}
-
-/* Action buttons group (upload icons, etc.) */
+.section-head .title i{ flex:0 0 auto; }
 .section-head .actions{
-  display:flex !important;
-  align-items:center !important;                /* FIX: vertically center icons with the title line */
-  justify-content:flex-end;
-  gap:8px;
-  flex-wrap:nowrap !important;                  /* FIX: do not drop to next line */
+  display:flex !important; align-items:center !important;
+  justify-content:flex-end; gap:8px; flex-wrap:nowrap !important;
 }
-
-/* Make the small icon buttons solid and aligned */
-.btn.icon,
-.icon-btn,
-.section-head .actions label.btn.icon{
-  display:inline-flex !important;               /* FIX */
-  align-items:center !important;                /* FIX */
-  justify-content:center !important;            /* FIX */
-  height:34px;                                  /* FIX: consistent hit area */
-  min-width:34px;                               /* FIX */
-  padding:0 8px;                                /* FIX */
-  border-radius:10px;
-  background:#fff;                              /* match your theme button base */
-  border:1px solid var(--line);
-  box-shadow:0 4px 10px rgba(0,0,0,.04);
-  cursor:pointer;
+.btn.icon, .icon-btn, .section-head .actions label.btn.icon{
+  display:inline-flex !important; align-items:center !important; justify-content:center !important;
+  height:34px; min-width:34px; padding:0 8px; border-radius:10px;
+  background:#fff; border:1px solid var(--line); box-shadow:0 4px 10px rgba(0,0,0,.04); cursor:pointer;
 }
-
-/* Ensure the upload <label> stays inline with the buttons even if text gets long */
-.section-head .actions label.btn.icon{
-  white-space:nowrap;                            /* FIX */
-}
-
-/* On very tight screens, still try to keep a single line; if it overflows, title truncates. */
-@media (max-width: 380px){
-  .section-head{
-    grid-template-columns: 1fr auto;            /* still two columns */
-  }
-}
-
+.section-head .actions label.btn.icon{ white-space:nowrap; }
+@media (max-width: 380px){ .section-head{ grid-template-columns: 1fr auto; } }
 </style>
 </head>
 
@@ -373,7 +321,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </div>
 </div>
 
-<!-- ===================== HERO v6 ===================== -->
+<!-- ===================== HERO ===================== -->
 <header class="hero" aria-label="Hero">
   <div class="wrap">
     <div class="crest" aria-hidden="true"></div>
@@ -409,7 +357,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     بهذا الإيقاع اللطيف، تُنمي الفضول والجرأة على التفكير، وتُراعي الفروق الفردية بخطوات صغيرة ثابتة.
   </p>
   <p class="lead" data-en>
-    <b>Fatima</b> turns science into safe, memorable mini-experiences: start with a real-life phenomenon,
+    Fatima turns science into safe, memorable mini-experiences: start with a real-life phenomenon,
     ask smart questions, form a hypothesis, run a quick test, read the data, and sketch a simple model.
     This gentle rhythm grows curiosity and confidence while honoring differences.
   </p>
@@ -438,7 +386,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     <li data-en>Model explanations in physics, biology, and chemistry.</li>
     <li data-en>Lab safety, data reading, and scientific sketching.</li>
     <li data-en>Scientific writing and evidence-based presentations.</li>
-    <li data-en>Problem solving via short experiments & quick improvements.</li>
+    <li data-en>Problem solving via short experiments and quick improvements.</li>
   </ul>
 </section>
 
@@ -471,25 +419,6 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </p>
 </section>
 
-<!-- ===== Professional Charter ===== -->
-<!--<section id="ethics" class="reveal">
-  <div class="section-head">
-    <h3 class="title"><i class="fa-solid fa-scale-balanced"></i><span data-ar>الميثاق المهني والقيم</span><span data-en>Professional Charter</span></h3>
-  </div>
-
-  <div class="cv-card pale-glow">
-    <h4 data-ar>القيم</h4><h4 data-en>Values</h4>
-    <ul>
-      <li data-ar>السلامة والانضباط العلمي والصدق الأكاديمي.</li>
-      <li data-ar>الإنصاف وتمايز التعلم واحترام التنوع.</li>
-      <li data-ar>التعلم المستمر وعقلية النمو.</li>
-
-      <li data-en>Safety, rigor, and academic honesty.</li>
-      <li data-en>Equity, differentiation, and respect for diversity.</li>
-      <li data-en>Continuous learning and a growth mindset.</li>
-    </ul>
-  </div>
-</section>-->
 <!-- ========== PROFESSIONAL CHARTER (Expanded) ========== -->
 <section id="ethics" class="reveal">
   <div class="section-head">
@@ -500,21 +429,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </h3>
   </div>
 
-  <!-- 🧰 OLD (kept per your request)
-  <div class="cv-card pale-glow">
-    <h4 data-ar>القيم</h4><h4 data-en>Values</h4>
-    <ul>
-      <li data-ar>السلامة والانضباط العلمي والصدق الأكاديمي.</li>
-      <li data-ar>الإنصاف وتمايز التعلم واحترام التنوع.</li>
-      <li data-ar>التعلم المستمر وعقلية النمو.</li>
-      <li data-en>Safety, rigor, and academic honesty.</li>
-      <li data-en>Equity, differentiation, and respect for diversity.</li>
-      <li data-en>Continuous learning and a growth mindset.</li>
-    </ul>
-  </div>
-  -->
-
-  <!-- الرسالة المهنية / Professional Message -->
+  <!-- الرسالة المهنية -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>رسالتي المهنية</h4>
     <h4 style="margin-top:0" data-en>My Professional Message</h4>
@@ -528,7 +443,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </p>
   </div>
 
-  <!-- القيم / Values -->
+  <!-- القيم -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>القيم</h4>
     <h4 style="margin-top:0" data-en>Core Values</h4>
@@ -545,7 +460,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- واجباتي المهنية / My Professional Duties -->
+  <!-- واجباتي المهنية -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>واجباتي المهنية</h4>
     <h4 style="margin-top:0" data-en>My Professional Duties</h4>
@@ -564,7 +479,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- مسؤولياتي تجاه الطالبات والمدرسة / Responsibilities -->
+  <!-- مسؤولياتي -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>مسؤولياتي</h4>
     <h4 style="margin-top:0" data-en>Responsibilities</h4>
@@ -581,7 +496,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- أخلاقيات التقويم والنزاهة الأكاديمية / Assessment Ethics -->
+  <!-- النزاهة الأكاديمية -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>أخلاقيات التقويم والنزاهة الأكاديمية</h4>
     <h4 style="margin-top:0" data-en>Assessment Ethics & Academic Integrity</h4>
@@ -596,7 +511,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- السلامة المختبرية وحماية الطالبة / Lab Safety & Safeguarding -->
+  <!-- السلامة المختبرية -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>السلامة المختبرية وحماية الطالبة</h4>
     <h4 style="margin-top:0" data-en>Lab Safety & Safeguarding</h4>
@@ -611,7 +526,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- المسؤولية الرقمية والخصوصية / Digital Responsibility & Data Privacy -->
+  <!-- المسؤولية الرقمية -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>المسؤولية الرقمية والخصوصية</h4>
     <h4 style="margin-top:0" data-en>Digital Responsibility & Privacy</h4>
@@ -626,7 +541,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- التطوير المهني والمجتمع المدرسي / PD & Community -->
+  <!-- التطوير المهني -->
   <div class="cv-card pale-glow">
     <h4 style="margin-top:0" data-ar>التطوير المهني والمجتمع المدرسي</h4>
     <h4 style="margin-top:0" data-en>Professional Development & Community</h4>
@@ -642,7 +557,6 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </div>
 </section>
 <!-- ========== /PROFESSIONAL CHARTER ========== -->
-
 
 <!-- ===== CV ===== -->
 <section id="cv" class="reveal">
@@ -702,7 +616,6 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     </ul>
   </div>
 
-  <!-- Optional CV image holder -->
   <div id="cvImgHolder" class="cv-card" style="display:none;padding:0;overflow:hidden"></div>
 </section>
 
@@ -710,10 +623,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="certs" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-certificate"></i><span data-ar>الشهادات </span><span data-en>Certification Media (Images / PDFs)</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="certInput" class="btn icon" title="رفع صور أو PDF"><i class="fa-solid fa-upload"></i></label>
-    <input id="certInput" type="file" multiple accept="image/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="certInput" class="btn icon" title="رفع صور أو PDF"><i class="fa-solid fa-upload"></i></label>
+      <input id="certInput" type="file" multiple accept="image/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="certGrid"></div>
 </section>
@@ -722,10 +635,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-worksheets" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-file-pen"></i><span data-ar>أوراق العمل والاختبارات</span><span data-en>Worksheets & Exams</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="wsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-    <input id="wsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="wsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+      <input id="wsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="wsGrid"></div>
 </section>
@@ -734,10 +647,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-activities" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-layer-group"></i><span data-ar>الأنشطة</span><span data-en>Activities</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="actsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-    <input id="actsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="actsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+      <input id="actsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="actsGrid"></div>
 </section>
@@ -746,10 +659,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-schedule" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-calendar-check"></i><span data-ar>جداول الدروس</span><span data-en>Schedule Lessons</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="schedInput" class="btn icon" title="رفع صورة/ملف/فيديو"><i class="fa-solid fa-upload"></i></label>
-    <input id="schedInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="schedInput" class="btn icon" title="رفع صورة/ملف/فيديو"><i class="fa-solid fa-upload"></i></label>
+      <input id="schedInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="schedGrid"></div>
 </section>
@@ -758,10 +671,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-broadcast" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-tower-broadcast"></i><span data-ar>الإذاعة المدرسية / Broadcast</span><span data-en>Broadcast</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="castInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-    <input id="castInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="castInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+      <input id="castInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="castGrid"></div>
 </section>
@@ -770,10 +683,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-support" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-hands-holding-child"></i><span data-ar>تعزيز ودعم الطالبات</span><span data-en>Support & Ta'zeez</span></h3>
-  </div>
-  <div class="actions" data-guard>
-    <label for="supInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-    <input id="supInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    <div class="actions" data-guard>
+      <label for="supInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+      <input id="supInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
+    </div>
   </div>
   <div class="media-grid" id="supGrid"></div>
 </section>
@@ -784,10 +697,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     <h3 class="title"><i class="fa-solid fa-chalkboard-user"></i><span data-ar>مهارات واستراتيجيات التدريس</span><span data-en>Teaching Skills & Strategies</span></h3>
   </div>
   <div class="skills-grid">
-    <div class="skill"><i class="fa-solid fa-flask-vial"></i><h4 data-ar>مختبر الدقيقة الواحدة</h4><h4 data-en>One-Minute Lab</h4><p data-ar>تجربة آمنة صغيرة لقياس مفهوم واحد مع بطاقة نتائج.</p><p data-en>Safe micro-experiment for a single idea + results card.</p></div>
-    <div class="skill"><i class="fa-solid fa-diagram-project"></i><h4 data-ar>تعلم قائم على الظواهر</h4><h4 data-en>Phenomena-Based</h4><p data-ar>نبدأ بظاهرة قريبة ثم نبني التفسير خطوة بخطوة.</p><p data-en>Start from a real phenomenon; layer explanations.</p></div>
+    <div class="skill"><i class="fa-solid fa-flask-vial"></i><h4 data-ar>مختبر الدقيقة الواحدة</h4><h4 data-en>One-Minute Lab</h4><p data-ar>تجربة آمنة صغيرة لقياس مفهوم واحد مع بطاقة نتائج.</p><p data-en>Safe micro-experiment for a single idea plus a results card.</p></div>
+    <div class="skill"><i class="fa-solid fa-diagram-project"></i><h4 data-ar>تعلم قائم على الظواهر</h4><h4 data-en>Phenomena-Based</h4><p data-ar>نبدأ بظاهرة قريبة ثم نبني التفسير خطوة بخطوة.</p><p data-en>Start from a real phenomenon and layer explanations.</p></div>
     <div class="skill"><i class="fa-solid fa-microscope"></i><h4 data-ar>دفتر الملاحظة العلمية</h4><h4 data-en>Science Notebook</h4><p data-ar>رسومات، جداول، فرضيات، بيانات، استنتاجات.</p><p data-en>Drawings, tables, hypotheses, data, conclusions.</p></div>
-    <div class="skill"><i class="fa-solid fa-people-arrows"></i><h4 data-ar>تبادل الأدوار</h4><h4 data-en>Role-Swap</h4><p data-ar>طالبة تشرح وأخرى تتحقق من الدليل ثم تبادل.</p><p data-en>Explainer & evidence-checker pairs then swap.</p></div>
+    <div class="skill"><i class="fa-solid fa-people-arrows"></i><h4 data-ar>تبادل الأدوار</h4><h4 data-en>Role-Swap</h4><p data-ar>طالبة تشرح وأخرى تتحقق من الدليل ثم تبادل.</p><p data-en>Explainer and evidence-checker pairs, then swap.</p></div>
     <div class="skill"><i class="fa-solid fa-magnifying-glass-chart"></i><h4 data-ar>تحليل أخطاء شائعة</h4><h4 data-en>Common-Error Analysis</h4><p data-ar>نماذج أخطاء آمنة للنقاش لتثبيت المفاهيم.</p><p data-en>Discuss safe error models to cement ideas.</p></div>
     <div class="skill"><i class="fa-solid fa-chart-line"></i><h4 data-ar>مخطط بيانات سريع</h4><h4 data-en>Quick Data Plot</h4><p data-ar>رسم بسيط للبيانات بعد كل نشاط وربطه بالاستنتاج.</p><p data-en>Simple plotting after each activity, tied to claims.</p></div>
   </div>
@@ -871,7 +784,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildWindow({ title, icon = 'fa-rectangle-list', actions = [] }){
     overlay.innerHTML = `
       <div class="win" role="document">
-        <button class="close-fab" data-action="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>  <!-- 🔧 CHANGED: big clear close -->
+        <button class="close-fab" data-action="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>
         <div class="toolbar">
           <div class="title">
             <i class="fa-solid ${icon}"></i>
@@ -940,7 +853,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmbWF4ZmJrdGlseW5ybW14em54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwMTUwOTIsImV4cCI6MjA3NzU5MTA5Mn0.-Ea7pO_mkEEZHFUQ1WugJ3LeYtnIJxULcSiJKRQccIE';
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   const MEDIA_BUCKET = 'mida';
-  const BASE = 'fatima1'; /* namespace */
+  const BASE = 'fatima1';
 
   const PATH = {
     CERT:  `${BASE}/certifications`,
@@ -976,7 +889,7 @@ document.addEventListener('DOMContentLoaded', () => {
   async function uploadManyAt(path, files){
     const user = await getUser(); if(!requireUser(user)) return;
     for(const f of files){
-      const safe = (f.name || 'file').replace(/\s+/g,'_').toLowerCase();
+      const safe = (f.name || 'file').replace(/\س+/g,'_').toLowerCase();
       const fixed = /\.mb4$/i.test(safe) ? safe.replace(/\.mb4$/i,'.mp4') : safe;
       const to = `${path}/${Date.now()}_${fixed}`;
       await supabaseClient.storage.from(MEDIA_BUCKET).upload(to, f, { cacheControl:'3600', upsert:false });
@@ -1000,7 +913,6 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAll();
   }
 
-  /* render small tidy cards */
   function renderMixedGrid(container, files){
     if (!files.length){
       container.innerHTML = '<p style="grid-column:1/-1;color:#6f6154;margin:6px 2px">لا توجد عناصر حتى الآن.<span data-en> No items yet.</span></p>';
