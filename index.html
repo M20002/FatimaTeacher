@@ -11,14 +11,14 @@
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-/* ===================== THEME: Deep Sand Beige (new shade) ===================== */
+/* ===================== THEME: Deep Sand Beige ===================== */
 :root{
-  --bg:#f8f1e7;          /* warmer, deeper beige than before */
+  --bg:#f8f1e7;
   --card:#ffffff;
   --ink:#2a231c;
   --muted:#6f6154;
-  --brand:#e7d8c7;       /* NEW primary */
-  --brand-2:#d9c6b0;     /* NEW accent */
+  --brand:#e7d8c7;       /* primary */
+  --brand-2:#d9c6b0;     /* accent */
   --line:#e6d7c5;
   --accent:#f3e8db;
   --brand-ink:#6e4922;   /* headings/buttons */
@@ -28,6 +28,23 @@ html,body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',san
 html{scroll-behavior:smooth}
 a{color:#7a5328;text-decoration:none}
 .container{max-width:1100px;margin:0 auto;padding:0 18px}
+
+/* ===================== GLOBAL BUTTONS ===================== */
+.btn{
+  background:var(--brand);
+  color:var(--brand-ink);
+  border:1px solid #cfbca7;
+  border-radius:12px;
+  padding:10px 14px;
+  font-weight:900;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn.secondary{background:#fbf3e8;color:#6e5136;border:1px solid var(--line)}
+.btn.icon{padding:8px 10px;border-radius:10px}
+.btn.icon i{font-size:14px;color:#7a5328}
 
 /* ===================== TOPBAR ===================== */
 .topbar{
@@ -47,6 +64,7 @@ a{color:#7a5328;text-decoration:none}
 .lang-switch .secondary{background:#fbf3e8;color:#7a5328;border:1px solid var(--line)}
 #sectionsBtn{background:#f1e5d6;color:#7a5328;border:1px solid var(--line)}
 [data-guard]{display:none}
+
 /* ===================== HERO v6 — Mobile Floral Crest ===================== */
 .hero{
   position:relative;
@@ -58,217 +76,129 @@ a{color:#7a5328;text-decoration:none}
     linear-gradient(180deg,#faf6f0 0%,#f4eee5 70%,#ffffff 100%);
   overflow:hidden;
 }
-
-/* subtle linen texture */
 .hero::before{
-  content:"";
-  position:absolute; inset:0; pointer-events:none; opacity:.16;
+  content:""; position:absolute; inset:0; pointer-events:none; opacity:.16;
   background-image:url("data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'>\
 <path d='M0 24h48M24 0v48' stroke='%23e2d6c5' stroke-width='0.7' fill='none'/></svg>");
   background-size:48px 48px;
 }
-
-/* floating soft petals (very subtle on mobile) */
 .hero::after{
-  content:"";
-  position:absolute; inset:-12% -20%;
-  background:
-    url(\"data:image/svg+xml;utf8,\
+  content:""; position:absolute; inset:-12% -20%;
+  background:url(\"data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 160 160'>\
 <g fill='%23eadfce' opacity='.55'>\
 <circle cx='22' cy='18' r='5'/><circle cx='130' cy='32' r='4'/>\
 <circle cx='70' cy='90' r='6'/><circle cx='136' cy='128' r='5'/>\
 </g></svg>\") center/500px no-repeat;
-  animation: crestDrift 26s linear infinite;
-  pointer-events:none; opacity:.26;
+  animation: crestDrift 26s linear infinite; pointer-events:none; opacity:.26;
 }
 @keyframes crestDrift{ from{transform:translateY(0)} to{transform:translateY(-8%)} }
-
-/* layout: single column first */
 .hero .wrap{
   position:relative; z-index:1;
   max-width:980px; margin:0 auto; padding:0 16px;
   display:grid; gap:18px; align-items:center; justify-items:center;
 }
-
-/* Floral crest + ring */
 .hero .crest{
   width:140px; height:140px; border-radius:999px;
   border:1px solid var(--line);
-  background:
-    radial-gradient(90px 90px at 50% 44%, #fff 0%, #f0e6d9 100%);
+  background: radial-gradient(90px 90px at 50% 44%, #fff 0%, #f0e6d9 100%);
   box-shadow:0 10px 24px rgba(94,70,48,.12);
   position:relative; display:grid; place-items:center; overflow:hidden;
 }
 .hero .crest::after{
-  content:"";
-  position:absolute; inset:12px; border-radius:999px; pointer-events:none;
-  background:
-    url(\"data:image/svg+xml;utf8,\
+  content:""; position:absolute; inset:12px; border-radius:999px; pointer-events:none;
+  background:url(\"data:image/svg+xml;utf8,\
 <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 220 220'>\
 <g fill='none' stroke='%23cdbda8' stroke-width='1.6' opacity='.85'>\
 <path d='M36 120c22-34 60-36 88-70'/><path d='M54 136c18-16 32-24 60-44'/></g>\
 <g fill='%23e8dac7' opacity='.95'>\
 <circle cx='84' cy='52' r='8'/><circle cx='60' cy='90' r='7'/><circle cx='46' cy='126' r='6'/></g></svg>\") center/170px no-repeat;
 }
-
-/* Title stack (big, readable, centered) */
 .hero-title{
-  margin:6px 0 4px;
-  text-align:center;
-  font-size:clamp(24px,6.2vw,36px);
-  color:var(--brand-ink);
+  margin:6px 0 4px; text-align:center;
+  font-size:clamp(24px,6.2vw,36px); color:var(--brand-ink);
   font-weight:900; letter-spacing:.15px;
 }
 .hero-sub{
-  margin:0 0 10px;
-  text-align:center;
-  font-size:clamp(14px,3.8vw,18px);
-  color:#6e5136; font-weight:700; opacity:.96;
+  margin:0 0 10px; text-align:center;
+  font-size:clamp(14px,3.8vw,18px); color:#6e5136; font-weight:700; opacity:.96;
 }
-
-/* Slim divider */
 .hero-divider{
   width:110px; height:6px; border-radius:999px; margin:10px auto 14px;
   background:linear-gradient(90deg,#eadfce,#d8c8b2,#eadfce);
   box-shadow:0 4px 10px rgba(94,70,48,.12);
 }
-
-/* CTAs: only two on mobile */
-.hero-cta{
-  display:flex; gap:10px; flex-wrap:wrap; justify-content:center;
-}
-.hero .btn{
-  background:var(--brand); color:var(--brand-ink);
-  border:1px solid #cdbda8; border-radius:12px;
-  padding:10px 14px; font-weight:900; cursor:pointer;
-}
-.hero .btn.secondary{ background:#faf4eb; color:#6e5136; border:1px solid var(--line); }
-
-/* hide anything extra inside hero on narrow screens (we removed chips entirely) */
-
-/* scale up spacing on larger screens */
+.hero-cta{ display:flex; gap:10px; flex-wrap:wrap; justify-content:center }
 @media (min-width:760px){
   .hero .wrap{ gap:22px; }
   .hero .crest{ width:160px; height:160px; }
   .hero-title{ font-size:clamp(28px,4.6vw,44px); }
 }
 
-/* ===== keep previous hero styles in comments (do not delete) ===== */
-/* [HERO v4/v5 rules preserved above or in your file as comments per your request] */
-
-/* ===================== HERO — Rich Beige Floral/Butterfly (more ornaments) ===================== */
-/*.hero{
-  position:relative;
-  padding:clamp(54px,8.8vw,116px) 0  clamp(36px,5.2vw,64px);
-  border-bottom:1px solid var(--line);
-  background:
-    radial-gradient(980px 560px at 10% -12%, #efdeca 0%, rgba(239,222,202,0) 60%),
-    radial-gradient(820px 520px at 108% 85%, #ead8c1 0%, rgba(234,216,193,0) 60%),
-    linear-gradient(180deg,#f8f1e7 0%,#f5ecdf 70%,#ffffff 100%);
-  overflow:hidden;
-}
-.hero .orn{
-  position:absolute; inset:0; pointer-events:none; opacity:.45;
-  background-repeat:no-repeat; background-size:contain;
-}
-.hero .orn.flower-left{
-  width:640px;height:640px; top:-140px; inset-inline-start:-140px; opacity:.26;
-  background-image:url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'>\
-<defs><linearGradient id='g' x1='0' x2='1'><stop offset='0' stop-color='%23e0c9ac'/><stop offset='1' stop-color='%23f1e2cf'/></linearGradient></defs>\
-<g fill='url(%23g)'>\
-<circle cx='120' cy='120' r='86'/><circle cx='220' cy='80' r='56'/>\
-<circle cx='170' cy='200' r='70'/><circle cx='300' cy='150' r='54'/>\
-</g>\
-<g fill='none' stroke='%23c6a884' stroke-opacity='.55'>\
-<path d='M60 260c80-48 160 48 240 0' stroke-width='8'/>\
-<path d='M90 310c60-34 120 34 180 0' stroke-width='6'/>\
-</g></svg>");
-}
-.hero .orn.butter-right{
-  width:600px;height:600px; bottom:-140px; inset-inline-end:-140px; opacity:.22;
-  background-image:url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'>\
-<g fill='%23e7d3b9' fill-opacity='.9'>\
-<path d='M160 270c-40-70 60-120 100-50 14-50 90-52 102 8 14 64-52 100-104 66-26 24-78 22-98-24z'/>\
-</g>\
-<g stroke='%23bd9f7a' stroke-opacity='.6' fill='none'>\
-<path d='M190 310c26-12 52-12 78 0' stroke-width='5'/>\
-</g></svg>");
-}
-
-
-/* NEW subtle sprigs across top */
-
-/*.hero .orn.sprigs{
-  width:100%; height:200px; top:0; left:0; right:0; opacity:.18;
-  background-image:url("data:image/svg+xml;utf8,\
-<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 200'>\
-<g stroke='%23cfb593' stroke-width='3' fill='none' stroke-opacity='.7'>\
-<path d='M20 160c80-60 140-40 220-90 60-38 120-20 180 10 100 50 160-10 240-30 80-20 160 40 220 60 80 24 160 10 200-10'/>\
-</g></svg>");
-}
-
-.hero-inner{display:grid}
-.hero-card{
-  max-width:960px;margin:0 auto;text-align:center;
-  background:linear-gradient(180deg,#ffffff 0%, #f1e6d8 100%);
-  border:1px solid var(--line); border-radius:28px;
-  padding:clamp(28px,4vw,46px);
-  box-shadow:0 18px 38px rgba(110,73,34,.12);
-}
-.hero-title{
-  margin:0 0 6px;
-  font-size:clamp(30px,5.1vw,46px);
-  color:var(--brand-ink);font-weight:900;letter-spacing:.15px
-}
-.hero-sub{
-  margin:2px 0 18px;
-  font-size:clamp(15px,2.2vw,19px);
-  color:#7a5328;font-weight:700;opacity:.95
-}
-.hero-divider{
-  width:140px;height:8px;border-radius:999px;margin:14px auto 22px;
-  background:linear-gradient(90deg,#e3d2be, #cfbca7, #e3d2be);
-  box-shadow:0 4px 10px rgba(110,73,34,.15)
-}
-.hero-cta{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
-.btn{background:var(--brand);color:var(--brand-ink);border:1px solid #cfbca7;border-radius:12px;padding:10px 14px;font-weight:900;cursor:pointer}
-.btn.secondary{background:#fbf3e8;color:#7a5328;border:1px solid var(--line)}
-*/
 /* ===================== SECTIONS ===================== */
 section{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 26px rgba(110,73,34,.07);padding:24px;margin:22px auto;scroll-margin-top:90px}
 .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-inline:8px;margin:-4px -6px 12px}
 .section-head .title{margin:0;color:#7a5328;display:flex;align-items:center;gap:10px;border-inline-start:6px solid var(--brand-2);padding-inline-start:10px}
 .section-head .title i{color:#a98559}
 .section-head .actions{display:flex;gap:8px}
-.btn.icon{width:34px;height:34px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:10px}
-.btn.icon i{font-size:14px}
-.lead{font-size:18px;line-height:1.9}*/
+.lead{font-size:18px;line-height:1.9} /* fixed: stray comment removed earlier */
 
-/* ===================== MEDIA GRID ===================== */
-.media-grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
-@media (max-width:560px){.media-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}}
-.media-card{position:relative;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 6px 18px rgba(110,73,34,.07);overflow:hidden}
-.media-thumb{position:relative;width:100%;background:#000;overflow:hidden}
-.media-thumb[data-kind="image"]{aspect-ratio:3/2}
-.media-thumb[data-kind="video"]{aspect-ratio:16/9}
-.media-thumb[data-kind="pdf"]{aspect-ratio:3/2;background:#fff}
-.media-thumb img,.media-thumb video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;cursor:zoom-in;background:#fff}
-.media-actions{position:absolute;top:8px;inset-inline-end:8px;display:flex;gap:6px;z-index:2}
-.icon-btn{background:rgba(255,255,255,.98);border:1px solid var(--line);border-radius:10px;padding:6px;cursor:pointer}
+/* ===================== MEDIA GRID — SMALL TIDY CARDS ===================== */
+/* 🔧 CHANGED: compact cards + consistent spacing; 3-up on most phones, 2-up on very narrow */
+.media-grid{
+  display:grid;
+  gap:12px;                           /* compact spacing */
+  grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+}
+@media (min-width:480px){
+  /* phones ≥480px: slightly larger cards, still many per row */
+  .media-grid{ grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); }
+}
+@media (min-width:768px){
+  /* tablets/desktop */
+  .media-grid{ grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:14px; }
+}
 
-/* Cards */
-.cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
-.cv-card.pale-glow{background:linear-gradient(180deg,#ffffff,#f1e6d8);border-color:#d8c7b2;box-shadow:0 10px 24px rgba(110,73,34,.13),0 1px 0 rgba(255,250,242,.95) inset}
+.media-card{
+  position:relative;background:#fff;border:1px solid var(--line);
+  border-radius:12px; overflow:hidden;
+  box-shadow:0 6px 14px rgba(110,73,34,.06);
+  transition:transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+}
+.media-card:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(110,73,34,.12); border-color:#d9c6b0; }
+.media-thumb{ position:relative; width:100%; background:#000; overflow:hidden }
+.media-thumb[data-kind="image"]{ aspect-ratio:4/5 }   /* 🔧 CHANGED: smaller portrait-ish to keep cards compact */
+.media-thumb[data-kind="video"]{ aspect-ratio:16/9 }
+.media-thumb[data-kind="pdf"]{ aspect-ratio:4/5; background:#fff }
+.media-thumb img,.media-thumb video{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; background:#fff
+}
 
-/* Force tidy 2-col on phones for media */
-@media (max-width: 600px){
-  .media-grid{grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px;}
+/* action icons on cards */
+.media-actions{
+  position:absolute; top:8px; inset-inline-end:8px; display:flex; gap:6px; z-index:2
+}
+.icon-btn{
+  background:rgba(255,255,255,.98); border:1px solid var(--line);
+  border-radius:10px; padding:6px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center
+}
+.icon-btn i{color:#7a5328}
+
+/* 🧰 OLD (kept per your request): earlier phone-forced 2 columns
+@media (max-width: 640px){
+  .media-grid{grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 12px !important;}
+  .media-card{min-width:0}
   .media-thumb[data-kind="image"], .media-thumb[data-kind="pdf"]{aspect-ratio: 4/3;}
   .media-thumb[data-kind="video"]{aspect-ratio: 16/9;}
+}
+*/
+
+/* ===================== CV CARDS ===================== */
+.cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.cv-card.pale-glow{
+  background:linear-gradient(180deg,#ffffff,#f1e6d8);border-color:#d8c7b2;
+  box-shadow:0 10px 24px rgba(110,73,34,.13),0 1px 0 rgba(255,250,242,.95) inset
 }
 
 /* ===================== SKILLS ===================== */
@@ -298,10 +228,20 @@ footer .en{font-family:'Poppins',sans-serif;font-weight:600;color:#444}
 
 /* ===================== POPUP & AUTH ===================== */
 body.no-scroll{overflow:hidden}
-#overlay{position:fixed;inset:0;background:rgba(38,30,22,.64);display:none;align-items:center;justify-content:center;padding:16px;z-index:150;-webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px)}
+#overlay{
+  position:fixed; inset:0; background:rgba(38,30,22,.64);
+  display:none; align-items:center; justify-content:center; padding:16px; z-index:150;
+  -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px)
+}
 #overlay.show{display:flex}
-#overlay .win{width:min(980px,96vw);max-height:92vh;background:#fff;border:1px solid var(--line);border-radius:14px;box-shadow:0 24px 60px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
-#overlay .toolbar{position:sticky;top:0;display:flex;align-items:center;gap:8px;justify-content:space-between;padding:8px 10px;background:linear-gradient(180deg,#fff,#f1e6d8);border-bottom:1px solid var(--line);z-index:2}
+#overlay .win{
+  width:min(980px,96vw); max-height:92vh; background:#fff; border:1px solid var(--line);
+  border-radius:14px; box-shadow:0 24px 60px rgba(0,0,0,.35); display:flex; flex-direction:column; overflow:hidden; position:relative;
+}
+#overlay .toolbar{
+  position:sticky; top:0; display:flex; align-items:center; gap:8px; justify-content:space-between;
+  padding:8px 10px; background:linear-gradient(180deg,#fff,#f1e6d8); border-bottom:1px solid var(--line); z-index:2
+}
 #overlay .toolbar .title{display:flex;align-items:center;gap:10px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #overlay .toolbar .actions{display:flex;gap:8px}
 #overlay .toolbar .btnx{background:#f1e5d6;border:1px solid var(--line);border-radius:10px;padding:8px 12px;font-weight:800;cursor:pointer}
@@ -312,6 +252,16 @@ body.no-scroll{overflow:hidden}
 #overlay .content video{max-width:100%;max-height:84vh;display:block}
 #overlay .content iframe{width:100%;height:84vh;border:0;background:#fff}
 
+/* 🔧 CHANGED: CLEAR floating close button (big, always visible) */
+#overlay .close-fab{
+  position:absolute; top:10px; inset-inline-end:10px; z-index:3;
+  width:42px; height:42px; border-radius:999px; border:1px solid #cfbca7;
+  background:#fff; box-shadow:0 8px 18px rgba(0,0,0,.18);
+  display:flex; align-items:center; justify-content:center; cursor:pointer;
+}
+#overlay .close-fab i{color:#6e4922; font-size:18px}
+
+/* Auth modal */
 .modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:200}
 .input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:10px}
 
@@ -348,7 +298,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     <div></div>
 
     <div class="lang-switch" aria-label="Language and account">
-      <button id="sectionsBtn" class="nav-btn" aria-haspopup="true" aria-expanded="false"><i class="fa-solid fa-list"></i> <span data-ar>القائمة</span><span data-en>Sections</span></button>
+      <button id="sectionsBtn" class="nav-btn"><i class="fa-solid fa-list"></i> <span data-ar>القائمة</span><span data-en>Sections</span></button>
       <button class="secondary" id="to-ar" aria-label="Arabic">العربية</button>
       <button id="to-en" aria-label="English">English</button>
       <button id="loginBtn" class="login-btn" title="تسجيل الدخول" aria-label="Login"><i class="fa-solid fa-user"></i></button>
@@ -357,33 +307,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </div>
 </div>
 
-<!-- ===================== HERO (New with extra ornaments) ===================== 
-<header class="hero">
-  <div class="orn flower-left" aria-hidden="true"></div>
-  <div class="orn butter-right" aria-hidden="true"></div>
-  <div class="orn sprigs" aria-hidden="true"></div>
-
-  <div class="container hero-inner">
-    <div class="hero-card">
-      <h1 class="hero-title" data-ar>المعلمة فاطمة عوض حسن آل بشير</h1>
-      <h1 class="hero-title" data-en>Teacher Fatima Awad Hassan Al-Bashir</h1>
-
-      <div class="hero-sub" data-ar>تخصص: فيزياء | تُدرّس العلوم، الأحياء، والكيمياء – ابتدائي (٤–٦) ومتوسط وثانوي</div>
-      <div class="hero-sub" data-en>Major: Physics | Teaches Science, Biology & Chemistry — Grades 4–6, Middle & High</div>
-
-      <div class="hero-divider" aria-hidden="true"></div>
-
-      <div class="hero-cta">
-        <a class="btn" href="#cv" data-ar><i class="fa-solid fa-id-card"></i> السيرة الذاتية</a>
-        <a class="btn" href="#cv" data-en><i class="fa-solid fa-id-card"></i> CV</a>
-        <a class="btn secondary" href="#about" data-ar><i class="fa-solid fa-book-open"></i> نبذة</a>
-        <a class="btn secondary" href="#about" data-en><i class="fa-solid fa-book-open"></i> About</a>
-      </div>
-    </div>
-  </div>
-</header>
--->
-<!-- ===================== HERO v6 (new Mobile Floral Crest) ===================== -->
+<!-- ===================== HERO v6 ===================== -->
 <header class="hero" aria-label="Hero">
   <div class="wrap">
     <div class="crest" aria-hidden="true"></div>
@@ -399,28 +323,22 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     <div class="hero-cta">
       <a class="btn" href="#cv" data-ar><i class="fa-solid fa-id-card"></i> السيرة الذاتية</a>
       <a class="btn" href="#about" data-ar><i class="fa-solid fa-book-open"></i> نبذة</a>
-
       <a class="btn" href="#cv" data-en><i class="fa-solid fa-id-card"></i> CV</a>
       <a class="btn" href="#about" data-en><i class="fa-solid fa-book-open"></i> About</a>
     </div>
   </div>
 </header>
 
-<!--
-===================== PREVIOUS HERO kept by request =====================
-<header class="hero"> ... your older hero markup (v4/v5) ... </header>
--->
-
 <!-- ===================== MAIN ===================== -->
 <main class="container">
 
-<!-- ===== About (stronger copy) ===== -->
+<!-- ===== About ===== -->
 <section id="about" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-book-open"></i><span data-ar>نبذة تعريفية</span><span data-en>About</span></h3>
   </div>
   <p class="lead" data-ar>
-    أُحول <b>العلوم</b>  إلى حكايات مُلهِمة وتجارب آمنة قصيرة: تبدأ بظاهرة قريبة من حياة الطالبة،
+    أُحول <b>العلوم</b> إلى حكايات مُلهِمة وتجارب آمنة قصيرة: تبدأ بظاهرة قريبة من حياة الطالبة،
     ثم تُطلق أسئلة ذكية، ففرضيات، فاختبار سريع، فقراءة بيانات ورسمة بسيطة تُقود إلى استنتاج واضح.
     بهذا الإيقاع اللطيف، تُنمي الفضول والجرأة على التفكير، وتُراعي الفروق الفردية بخطوات صغيرة ثابتة.
   </p>
@@ -440,7 +358,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   <p class="lead" data-en>Curious learners who explain phenomena scientifically and use data to make responsible everyday decisions.</p>
 </section>
 
-<!-- ===== Objectives (course/teaching objectives) ===== -->
+<!-- ===== Objectives ===== -->
 <section id="objectives" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-list-check"></i><span data-ar>الأهداف التعليمية</span><span data-en>Objectives</span></h3>
@@ -458,7 +376,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   </ul>
 </section>
 
-<!-- ===== Saudi Teaching Goals (explicit) ===== -->
+<!-- ===== Saudi Goals ===== -->
 <section id="ksa-goals" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-flag"></i><span data-ar>أهداف التعليم في السعودية</span><span data-en>Saudi Teaching Goals</span></h3>
@@ -488,7 +406,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 </section>
 
 <!-- ===== Professional Charter ===== -->
-<section id="ethics" class="reveal">
+<!--<section id="ethics" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-scale-balanced"></i><span data-ar>الميثاق المهني والقيم</span><span data-en>Professional Charter</span></h3>
   </div>
@@ -505,9 +423,162 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
       <li data-en>Continuous learning and a growth mindset.</li>
     </ul>
   </div>
-</section>
+</section>-->
+<!-- ========== PROFESSIONAL CHARTER (Expanded) ========== -->
+<section id="ethics" class="reveal">
+  <div class="section-head">
+    <h3 class="title">
+      <i class="fa-solid fa-scale-balanced"></i>
+      <span data-ar>الميثاق المهني والقيم</span>
+      <span data-en>Professional Charter & Values</span>
+    </h3>
+  </div>
 
-<!-- ===== CV (now includes Certifications bullets) ===== -->
+  <!-- 🧰 OLD (kept per your request)
+  <div class="cv-card pale-glow">
+    <h4 data-ar>القيم</h4><h4 data-en>Values</h4>
+    <ul>
+      <li data-ar>السلامة والانضباط العلمي والصدق الأكاديمي.</li>
+      <li data-ar>الإنصاف وتمايز التعلم واحترام التنوع.</li>
+      <li data-ar>التعلم المستمر وعقلية النمو.</li>
+      <li data-en>Safety, rigor, and academic honesty.</li>
+      <li data-en>Equity, differentiation, and respect for diversity.</li>
+      <li data-en>Continuous learning and a growth mindset.</li>
+    </ul>
+  </div>
+  -->
+
+  <!-- الرسالة المهنية / Professional Message -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>رسالتي المهنية</h4>
+    <h4 style="margin-top:0" data-en>My Professional Message</h4>
+    <p class="lead" data-ar>
+      أصنع بيئةً آمنةً محفِّزةً تُنمّي الفضول العلمي، وتُقدِّم التعلم كرحلة متدرجة تُراعي الفروق الفردية،
+      وتبني الثقة والمسؤولية والقدرة على اتخاذ قرارات مستندة إلى الأدلة.
+    </p>
+    <p class="lead" data-en>
+      I cultivate a safe, motivating environment that nurtures scientific curiosity, scaffolds learning step-by-step,
+      honors differences, and builds confidence, responsibility, and evidence-based decision making.
+    </p>
+  </div>
+
+  <!-- القيم / Values -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>القيم</h4>
+    <h4 style="margin-top:0" data-en>Core Values</h4>
+    <ul>
+      <li data-ar>السلامة والصدق الأكاديمي والانضباط العلمي.</li>
+      <li data-ar>الإنصاف وتمايز التعلم واحترام التنوع والخصوصية.</li>
+      <li data-ar>التعاون وروح الفريق والتواصل الراقي.</li>
+      <li data-ar>التعلم المستمر وعقلية النمو والتحسين المستند إلى البيانات.</li>
+
+      <li data-en>Safety, academic honesty, and scientific rigor.</li>
+      <li data-en>Equity, differentiation, respect for diversity and privacy.</li>
+      <li data-en>Collaboration, teamwork, and professional communication.</li>
+      <li data-en>Continuous learning, growth mindset, and data-informed improvement.</li>
+    </ul>
+  </div>
+
+  <!-- واجباتي المهنية / My Professional Duties -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>واجباتي المهنية</h4>
+    <h4 style="margin-top:0" data-en>My Professional Duties</h4>
+    <ul>
+      <li data-ar>تخطيط دروس مبنية على الأهداف ومعايير المنهج واحتياجات الطالبات.</li>
+      <li data-ar>تطبيق استراتيجيات تدريس متنوعة (استقصاء، تعلم قائم على الظواهر/المشروعات، تعلم تعاوني).</li>
+      <li data-ar>توفير بيئة صفية آمنة ومنظمة مع تعليمات وإجراءات واضحة للمختبر.</li>
+      <li data-ar>تقويم بنائي مستمر مع تغذية راجعة بناءة وفرص إعادة التعلم.</li>
+      <li data-ar>توثيق التقدم والالتزام بأنظمة المدرسة ووزارة التعليم.</li>
+
+      <li data-en>Plan standards-aligned lessons responsive to learner needs.</li>
+      <li data-en>Use varied pedagogy (inquiry, phenomena/project-based, cooperative learning).</li>
+      <li data-en>Maintain a safe, orderly classroom with clear lab procedures.</li>
+      <li data-en>Provide ongoing formative assessment, constructive feedback, and relearning paths.</li>
+      <li data-en>Document progress and comply with school/MoE policies.</li>
+    </ul>
+  </div>
+
+  <!-- مسؤولياتي تجاه الطالبات والمدرسة / Responsibilities -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>مسؤولياتي</h4>
+    <h4 style="margin-top:0" data-en>Responsibilities</h4>
+    <ul>
+      <li data-ar>سلامة الطالبات أولًا، وإبلاغ أي مخاطر واتخاذ الإجراءات الوقائية الفورية.</li>
+      <li data-ar>حماية الخصوصية والبيانات، وعدم مشاركة معلومات الطالبات دون إذن نظامي.</li>
+      <li data-ar>تعزيز الحضور والالتزام والسلوك الإيجابي والاحترام المتبادل.</li>
+      <li data-ar>التواصل المهني مع الأسرة والإدارة، بلغة واضحة ومواعيد مناسبة.</li>
+
+      <li data-en>Student safety first; report hazards and act preventively.</li>
+      <li data-en>Protect privacy and data; never share student info without authorization.</li>
+      <li data-en>Promote attendance, responsibility, and mutual respect.</li>
+      <li data-en>Communicate professionally with families and leadership.</li>
+    </ul>
+  </div>
+
+  <!-- أخلاقيات التقويم والنزاهة الأكاديمية / Assessment Ethics -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>أخلاقيات التقويم والنزاهة الأكاديمية</h4>
+    <h4 style="margin-top:0" data-en>Assessment Ethics & Academic Integrity</h4>
+    <ul>
+      <li data-ar>اختبارات عادلة وشفافة مع معايير وروبركات معلنة.</li>
+      <li data-ar>منع الغش والسرقات العلمية ومعالجتها تربويًا بعدل واحترام.</li>
+      <li data-ar>استخدام البيانات لتحسين التعلم لا للعقاب.</li>
+
+      <li data-en>Fair, transparent assessments with shared rubrics.</li>
+      <li data-en>Prevent and address cheating/plagiarism with fairness and care.</li>
+      <li data-en>Use data to improve learning, not to punish.</li>
+    </ul>
+  </div>
+
+  <!-- السلامة المختبرية وحماية الطالبة / Lab Safety & Safeguarding -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>السلامة المختبرية وحماية الطالبة</h4>
+    <h4 style="margin-top:0" data-en>Lab Safety & Safeguarding</h4>
+    <ul>
+      <li data-ar>تعليمات مسبقة لكل تجربة، واستخدام أدوات الوقاية، وإدارة المخاطر.</li>
+      <li data-ar>معدات إسعاف أولي جاهزة، وإجراءات واضحة للطوارئ.</li>
+      <li data-ar>أنشطة بدائل آمنة عند الحاجة ومراعاة حال الطالبات الصحية.</li>
+
+      <li data-en>Pre-briefing, PPE use, and risk management for every activity.</li>
+      <li data-en>Accessible first-aid and clear emergency procedures.</li>
+      <li data-en>Safe alternatives when needed; consider students’ health conditions.</li>
+    </ul>
+  </div>
+
+  <!-- المسؤولية الرقمية والخصوصية / Digital Responsibility & Data Privacy -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>المسؤولية الرقمية والخصوصية</h4>
+    <h4 style="margin-top:0" data-en>Digital Responsibility & Privacy</h4>
+    <ul>
+      <li data-ar>استخدام منصات تعليمية معتمدة وسياسات قوية لكلمات المرور.</li>
+      <li data-ar>عدم نشر صور أو بيانات الطالبات دون موافقات نظامية.</li>
+      <li data-ar>تنمية الوعي بالأمان الرقمي والاستخدام الآمن للإنترنت.</li>
+
+      <li data-en>Use approved platforms and strong credential practices.</li>
+      <li data-en>No sharing of student images/data without consent.</li>
+      <li data-en>Teach safe, responsible use of digital tools.</li>
+    </ul>
+  </div>
+
+  <!-- التطوير المهني والمجتمع المدرسي / PD & Community -->
+  <div class="cv-card pale-glow">
+    <h4 style="margin-top:0" data-ar>التطوير المهني والمجتمع المدرسي</h4>
+    <h4 style="margin-top:0" data-en>Professional Development & Community</h4>
+    <ul>
+      <li data-ar>تحديث المحتوى والأساليب وفق أفضل الممارسات والأبحاث التربوية.</li>
+      <li data-ar>مشاركة الخبرات مع الزميلات والعمل بروح الفريق في المبادرات المدرسية.</li>
+      <li data-ar>خدمة المجتمع المدرسي عبر أنشطة علمية ومعارض ومشروعات نافعة.</li>
+
+      <li data-en>Update content and methods per evidence-based best practices.</li>
+      <li data-en>Share expertise and collaborate on school initiatives.</li>
+      <li data-en>Serve the school community through science events and projects.</li>
+    </ul>
+  </div>
+</section>
+<!-- ========== /PROFESSIONAL CHARTER ========== -->
+
+
+<!-- ===== CV ===== -->
 <section id="cv" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-id-card"></i><span data-ar>السيرة الذاتية</span><span data-en>Curriculum Vitae</span></h3>
@@ -569,20 +640,14 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
   <div id="cvImgHolder" class="cv-card" style="display:none;padding:0;overflow:hidden"></div>
 </section>
 
-<!-- ===== NOTE: Old "Certifications (Text)" section is intentionally kept as comments per your request =====
-<section id="certs-text" class="reveal">
-  ... (REMOVED FROM VIEW — content moved into CV) ...
-</section>
--->
-
-<!-- ===== Certification Media (images + PDFs) ===== -->
+<!-- ===== Certification Media ===== -->
 <section id="certs" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-certificate"></i><span data-ar>الشهادات </span><span data-en>Certification Media (Images / PDFs)</span></h3>
-    <div class="actions" data-guard>
-      <label for="certInput" class="btn icon" title="رفع صور أو PDF"><i class="fa-solid fa-upload"></i></label>
-      <input id="certInput" type="file" multiple accept="image/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="certInput" class="btn icon" title="رفع صور أو PDF"><i class="fa-solid fa-upload"></i></label>
+    <input id="certInput" type="file" multiple accept="image/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="certGrid"></div>
 </section>
@@ -591,10 +656,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-worksheets" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-file-pen"></i><span data-ar>أوراق العمل والاختبارات</span><span data-en>Worksheets & Exams</span></h3>
-    <div class="actions" data-guard>
-      <label for="wsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-      <input id="wsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="wsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+    <input id="wsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="wsGrid"></div>
 </section>
@@ -603,10 +668,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-activities" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-layer-group"></i><span data-ar>الأنشطة</span><span data-en>Activities</span></h3>
-    <div class="actions" data-guard>
-      <label for="actsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-      <input id="actsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="actsInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+    <input id="actsInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="actsGrid"></div>
 </section>
@@ -615,10 +680,10 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-schedule" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-calendar-check"></i><span data-ar>جداول الدروس</span><span data-en>Schedule Lessons</span></h3>
-    <div class="actions" data-guard>
-      <label for="schedInput" class="btn icon" title="رفع صورة/ملف/فيديو"><i class="fa-solid fa-upload"></i></label>
-      <input id="schedInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="schedInput" class="btn icon" title="رفع صورة/ملف/فيديو"><i class="fa-solid fa-upload"></i></label>
+    <input id="schedInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="schedGrid"></div>
 </section>
@@ -627,27 +692,27 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 <section id="media-broadcast" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-tower-broadcast"></i><span data-ar>الإذاعة المدرسية / Broadcast</span><span data-en>Broadcast</span></h3>
-    <div class="actions" data-guard>
-      <label for="castInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-      <input id="castInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="castInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+    <input id="castInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="castGrid"></div>
 </section>
 
-<!-- ===== Support / تعزيز ===== -->
+<!-- ===== Support ===== -->
 <section id="media-support" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-hands-holding-child"></i><span data-ar>تعزيز ودعم الطالبات</span><span data-en>Support & Ta'zeez</span></h3>
-    <div class="actions" data-guard>
-      <label for="supInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
-      <input id="supInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
-    </div>
+  </div>
+  <div class="actions" data-guard>
+    <label for="supInput" class="btn icon" title="رفع صور/فيديو/ملفات"><i class="fa-solid fa-upload"></i></label>
+    <input id="supInput" type="file" multiple accept="image/*,video/*,application/pdf" hidden>
   </div>
   <div class="media-grid" id="supGrid"></div>
 </section>
 
-<!-- ===== Teaching Strategies (NEW set) ===== -->
+<!-- ===== Teaching Strategies ===== -->
 <section id="skills" class="reveal">
   <div class="section-head">
     <h3 class="title"><i class="fa-solid fa-chalkboard-user"></i><span data-ar>مهارات واستراتيجيات التدريس</span><span data-en>Teaching Skills & Strategies</span></h3>
@@ -681,11 +746,11 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
     <h3 style="margin-top:0;color:#7a5328" data-en>Sign in</h3>
     <input id="emailInput" type="email" class="input" placeholder="email@example.com" style="margin-bottom:8px" autocomplete="username">
     <input id="passwordInput" type="password" class="input" placeholder="password" style="margin-bottom:8px" autocomplete="current-password">
-    <div class="cta" style="margin-top:12px;display:flex;gap:8px">
-      <button id="signInBtn" class="btn" data-ar>تسجيل الدخول</button>
-      <button id="signInBtn_en" class="btn" data-en>Sign in</button>
-      <button id="closeAuth" class="btn secondary" data-ar>إغلاق</button>
-      <button id="closeAuth_en" class="btn secondary" data-en>Close</button>
+    <div class="cta" style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap">
+      <button id="signInBtn" class="btn" data-ar><i class="fa-solid fa-right-to-bracket"></i> تسجيل الدخول</button>
+      <button id="signInBtn_en" class="btn" data-en><i class="fa-solid fa-right-to-bracket"></i> Sign in</button>
+      <button id="closeAuth" class="btn secondary" data-ar><i class="fa-solid fa-xmark"></i> إغلاق</button>
+      <button id="closeAuth_en" class="btn secondary" data-en><i class="fa-solid fa-xmark"></i> Close</button>
     </div>
     <p id="authMsg" class="note" style="margin-top:10px;color:#7a5328;font-weight:700"></p>
   </div>
@@ -740,6 +805,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function buildWindow({ title, icon = 'fa-rectangle-list', actions = [] }){
     overlay.innerHTML = `
       <div class="win" role="document">
+        <button class="close-fab" data-action="close" aria-label="Close"><i class="fa-solid fa-xmark"></i></button>  <!-- 🔧 CHANGED: big clear close -->
         <div class="toolbar">
           <div class="title">
             <i class="fa-solid ${icon}"></i>
@@ -756,7 +822,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </div>
         <div class="content"><div class="content-inner"></div></div>
       </div>`;
-    overlay.querySelector('[data-action="close"]').addEventListener('click', closeOverlay);
+    overlay.querySelectorAll('[data-action="close"]').forEach(b=>b.addEventListener('click', closeOverlay));
     overlay.addEventListener('click', (e)=>{ if (e.target === overlay) closeOverlay(); });
     document.addEventListener('keydown', escHandler);
     return { content: overlay.querySelector('.content-inner') };
@@ -808,7 +874,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNmbWF4ZmJrdGlseW5ybW14em54Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIwMTUwOTIsImV4cCI6MjA3NzU5MTA5Mn0.-Ea7pO_mkEEZHFUQ1WugJ3LeYtnIJxULcSiJKRQccIE';
   const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
   const MEDIA_BUCKET = 'mida';
-  const BASE = 'fatima1'; /* namespace for this teacher */
+  const BASE = 'fatima1'; /* namespace */
 
   const PATH = {
     CERT:  `${BASE}/certifications`,
@@ -868,6 +934,7 @@ document.addEventListener('DOMContentLoaded', () => {
     loadAll();
   }
 
+  /* render small tidy cards */
   function renderMixedGrid(container, files){
     if (!files.length){
       container.innerHTML = '<p style="grid-column:1/-1;color:#6f6154;margin:6px 2px">لا توجد عناصر حتى الآن.<span data-en> No items yet.</span></p>';
@@ -912,8 +979,8 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="media-thumb" data-kind="pdf" onclick="openPDF('${f.url}','${name}')">
               <div style="position:absolute;inset:0;display:grid;place-items:center;background:#fff">
                 <div style="text-align:center">
-                  <i class="fa-solid fa-file-pdf" style="font-size:36px;color:#7a5328"></i>
-                  <div style="margin-top:6px;color:#7a5328;font-weight:800;max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${name}</div>
+                  <i class="fa-solid fa-file-pdf" style="font-size:28px;color:#7a5328"></i>
+                  <div style="margin-top:6px;color:#7a5328;font-weight:800;max-width:90%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">${name}</div>
                 </div>
               </div>
             </div>
@@ -925,10 +992,10 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="icon-btn" data-del="${f.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
             <a class="icon-btn" href="${f.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
           </div>
-          <div class="media-thumb" data-kind="file" style="aspect-ratio:3/2;display:grid;place-items:center;background:#fff">
-            <div style="text-align:center;padding:18px">
-              <i class="fa-solid fa-file" style="font-size:28px;color:#7a5328"></i>
-              <div style="margin-top:8px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 8px">${f.name}</div>
+          <div class="media-thumb" data-kind="file" style="aspect-ratio:4/5;display:grid;place-items:center;background:#fff">
+            <div style="text-align:center;padding:14px">
+              <i class="fa-solid fa-file" style="font-size:24px;color:#7a5328"></i>
+              <div style="margin-top:8px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">${f.name}</div>
             </div>
           </div>
         </div>`;
@@ -939,7 +1006,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (confirm('هل تريدين حذف هذا الملف؟ / Delete this file?')) removeFile(path);
       });
     });
-    container.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+    document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
   }
 
   function renderSingleImage(holderEl, files, aspect='3/4'){
