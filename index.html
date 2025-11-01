@@ -46,6 +46,11 @@ a{color:#7a5328;text-decoration:none}
 .btn.icon{padding:8px 10px;border-radius:10px}
 .btn.icon i{font-size:14px;color:#7a5328}
 
+/* Make FA icons reserve width so text alignment doesn't jump across engines */
+.section-head .title i,
+.media-actions .icon-btn i,
+.btn.icon i{ width:1.25em; text-align:center; }
+
 /* ===================== TOPBAR ===================== */
 .topbar{
   position:sticky; top:0; z-index:130;
@@ -138,24 +143,46 @@ a{color:#7a5328;text-decoration:none}
 
 /* ===================== SECTIONS ===================== */
 section{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:0 10px 26px rgba(110,73,34,.07);padding:24px;margin:22px auto;scroll-margin-top:90px}
+
+/* OLD: flex sometimes wrapped icons in Edge
 .section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding-inline:8px;margin:-4px -6px 12px}
-.section-head .title{margin:0;color:#7a5328;display:flex;align-items:center;gap:10px;border-inline-start:6px solid var(--brand-2);padding-inline-start:10px}
-.section-head .title i{color:#a98559}
-.section-head .actions{display:flex;gap:8px}
+*/
+.section-head{
+  /* FIX: stable 2-column grid (title grows, actions stay compact) */
+  display:grid;
+  grid-template-columns: 1fr auto;
+  align-items:center;
+  gap:12px;
+  padding-inline:8px;
+  margin:-4px -6px 12px;
+}
+.section-head .title{
+  margin:0;color:#7a5328;display:flex;align-items:center;gap:10px;
+  border-inline-start:6px solid var(--brand-2);padding-inline-start:10px;
+  min-width:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+}
+.section-head .title i{color:#a98559; flex:0 0 auto;}
+.section-head .actions{display:flex;gap:8px;align-items:center;flex-wrap:nowrap}
+
+/* CV / text blocks */
 .lead{font-size:18px;line-height:1.9}
 
 /* ===================== MEDIA GRID — SMALL TIDY CARDS ===================== */
+/* OLD:
+.media-grid{ display:grid; gap:12px; grid-template-columns:repeat(auto-fill, minmax(140px,1fr)); }
+*/
 .media-grid{
-  display:grid;
-  gap:12px;
-  grid-template-columns:repeat(auto-fill, minmax(140px,1fr));
+  /* FIX: auto-fit packs more consistently across engines */
+  display:grid; gap:12px;
+  grid-template-columns:repeat(auto-fit, minmax(150px,1fr));
 }
 @media (min-width:480px){
-  .media-grid{ grid-template-columns:repeat(auto-fill, minmax(160px,1fr)); }
+  .media-grid{ grid-template-columns:repeat(auto-fit, minmax(170px,1fr)); }
 }
 @media (min-width:768px){
-  .media-grid{ grid-template-columns:repeat(auto-fill, minmax(190px,1fr)); gap:14px; }
+  .media-grid{ grid-template-columns:repeat(auto-fit, minmax(190px,1fr)); gap:14px; }
 }
+
 .media-card{
   position:relative;background:#fff;border:1px solid var(--line);
   border-radius:12px; overflow:hidden;
@@ -164,15 +191,36 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 }
 .media-card:hover{ transform:translateY(-2px); box-shadow:0 12px 22px rgba(110,73,34,.12); border-color:#d9c6b0; }
 .media-thumb{ position:relative; width:100%; background:#000; overflow:hidden }
-.media-thumb[data-kind="image"]{ aspect-ratio:4/5 }
-.media-thumb[data-kind="video"]{ aspect-ratio:16/9 }
-.media-thumb[data-kind="pdf"]{ aspect-ratio:4/5; background:#fff }
+
+/* Modern aspect-ratio + fallback for older engines */
+@supports (aspect-ratio: 1) {
+  .media-thumb[data-kind="image"]{ aspect-ratio:4/5 }
+  .media-thumb[data-kind="video"]{ aspect-ratio:16/9 }
+  .media-thumb[data-kind="pdf"]{ aspect-ratio:4/5; background:#fff }
+}
+@supports not (aspect-ratio: 1) {
+  .media-thumb[data-kind="image"]::before,
+  .media-thumb[data-kind="pdf"]::before{
+    content:""; display:block; padding-top:125%;
+    background:#fff;
+  }
+  .media-thumb[data-kind="video"]::before{
+    content:""; display:block; padding-top:56.25%;
+  }
+  .media-thumb > img, .media-thumb > video, .media-thumb > div{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+  }
+}
+
 .media-thumb img,.media-thumb video{
   position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; cursor:zoom-in; background:#fff
 }
 .media-actions{
   position:absolute; top:8px; inset-inline-end:8px; display:flex; gap:6px; z-index:2
+  /* Fallback if logical prop unsupported: */
 }
+.media-actions{ right:8px; } /* fallback */
+
 .icon-btn{
   background:rgba(255,255,255,.98); border:1px solid var(--line);
   border-radius:10px; padding:6px; cursor:pointer; display:inline-flex; align-items:center; justify-content:center
@@ -180,10 +228,20 @@ section{background:var(--card);border:1px solid var(--line);border-radius:16px;b
 .icon-btn i{color:#7a5328}
 
 /* ===================== CV CARDS ===================== */
-.cv-card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px}
+.cv-card{
+  background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px
+}
+/* OLD glow (more orange)
 .cv-card.pale-glow{
   background:linear-gradient(180deg,#ffffff,#f1e6د8);border-color:#d8c7b2;
   box-shadow:0 10px 24px rgba(110,73,34,.13),0 1px 0 rgba(255,250,242,.95) inset
+}
+*/
+/* FIX: neutral beige tint, no orange, subtle shadow */
+.cv-card.pale-glow{
+  background:linear-gradient(180deg,#ffffff,#f4eee5);
+  border-color:#e6d7c5;
+  box-shadow:0 8px 20px rgba(110,73,34,.08);
 }
 
 /* ===================== SKILLS ===================== */
@@ -225,7 +283,9 @@ body.no-scroll{overflow:hidden}
 }
 #overlay .toolbar{
   position:sticky; top:0; display:flex; align-items:center; gap:8px; justify-content:space-between;
-  padding:8px 10px; background:linear-gradient(180deg,#fff,#ف1e6d8); border-bottom:1px solid var(--line); z-index:2
+  /* OLD: background:linear-gradient(180deg,#fff,#ف1e6d8);  invalid hex caused parse failure in Edge */
+  background:linear-gradient(180deg,#fff,#f1e6d8); /* FIX */
+  border-bottom:1px solid var(--line); z-index:2
 }
 #overlay .toolbar .title{display:flex;align-items:center;gap:10px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #overlay .toolbar .actions{display:flex;gap:8px}
@@ -244,6 +304,9 @@ body.no-scroll{overflow:hidden}
   background:#fff; box-shadow:0 8px 18px rgba(0,0,0,.18);
   display:flex; align-items:center; justify-content:center; cursor:pointer;
 }
+/* fallback if inline-end unsupported */
+#overlay .close-fab{ right:10px; }
+
 #overlay .close-fab i{color:#6e4922; font-size:18px}
 
 /* Auth modal */
@@ -263,35 +326,6 @@ body.no-scroll{overflow:hidden}
 section ul{padding-inline-start:1.2em}
 section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-
-/* ===================== FIX header icons same line ===================== */
-.section-head{
-  display:grid !important;
-  grid-template-columns: 1fr auto !important;
-  align-items:center !important;
-  gap:12px;
-  padding-inline:8px;
-  margin:-4px -6px 12px;
-}
-.section-head .title{
-  min-width:0 !important;
-  display:flex; align-items:center; gap:10px;
-  border-inline-start:6px solid var(--brand-2);
-  padding-inline-start:10px;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-}
-.section-head .title i{ flex:0 0 auto; }
-.section-head .actions{
-  display:flex !important; align-items:center !important;
-  justify-content:flex-end; gap:8px; flex-wrap:nowrap !important;
-}
-.btn.icon, .icon-btn, .section-head .actions label.btn.icon{
-  display:inline-flex !important; align-items:center !important; justify-content:center !important;
-  height:34px; min-width:34px; padding:0 8px; border-radius:10px;
-  background:#fff; border:1px solid var(--line); box-shadow:0 4px 10px rgba(0,0,0,.04); cursor:pointer;
-}
-.section-head .actions label.btn.icon{ white-space:nowrap; }
-@media (max-width: 380px){ .section-head{ grid-template-columns: 1fr auto; } }
 </style>
 </head>
 
@@ -427,6 +461,7 @@ section li{list-style:disc inside;line-height:1.9;overflow-wrap:anywhere}
       <span data-ar>الميثاق المهني والقيم</span>
       <span data-en>Professional Charter & Values</span>
     </h3>
+    <!-- No actions here -->
   </div>
 
   <!-- الرسالة المهنية -->
@@ -889,8 +924,10 @@ document.addEventListener('DOMContentLoaded', () => {
   async function uploadManyAt(path, files){
     const user = await getUser(); if(!requireUser(user)) return;
     for(const f of files){
-      const safe = (f.name || 'file').replace(/\س+/g,'_').toLowerCase();
-      const fixed = /\.mb4$/i.test(safe) ? safe.replace(/\.mb4$/i,'.mp4') : safe;
+      /* OLD: had Arabic \س which broke the regex in some engines
+         const safe = (f.name || 'file').replace(/\س+/g,'_').toLowerCase(); */
+      const safe = (f.name || 'file').replace(/\s+/g,'_').toLowerCase(); /* FIX */
+      const fixed = /\.mb4$/i.test(safe) ? safe.replace(/\.mb4$/i,'.mp4') : safe; /* tolerate mb4 typo */
       const to = `${path}/${Date.now()}_${fixed}`;
       await supabaseClient.storage.from(MEDIA_BUCKET).upload(to, f, { cacheControl:'3600', upsert:false });
     }
@@ -970,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <button class="icon-btn" data-del="${f.path}" title="حذف / Delete"><i class="fa-solid fa-trash"></i></button>
             <a class="icon-btn" href="${f.url}" download title="تنزيل / Download"><i class="fa-solid fa-download"></i></a>
           </div>
-          <div class="media-thumb" data-kind="file" style="aspect-ratio:4/5;display:grid;place-items:center;background:#fff">
+          <div class="media-thumb" data-kind="file" style="display:grid;place-items:center;background:#fff">
             <div style="text-align:center;padding:14px">
               <i class="fa-solid fa-file" style="font-size:24px;color:#7a5328"></i>
               <div style="margin-top:8px;font-weight:800;color:#7a5328;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 6px">${f.name}</div>
@@ -1043,4 +1080,3 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 </body>
 </html>
-
